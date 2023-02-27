@@ -20,7 +20,7 @@ export default function Home() {
             <h1 className="text-5xl text-center">ETNOMEDICINE FINDER</h1>
           </div>
           <div>
-            <p className="text-2xl text-center pt-10">Temukan Solusi dari penyakitmu disini!</p>
+            <p className="text-2xl text-center pt-20">Temukan Solusi dari penyakitmu disini!</p>
           </div>
           <div className="text-center pt-40 pb-20">
             <form action="">
@@ -52,7 +52,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="py-10">*Tugas Kelompok</div>
+          <div className="py-20">*Copyright © 2023 All Rights Reserved</div>
         </div>
       </main>
     </>
