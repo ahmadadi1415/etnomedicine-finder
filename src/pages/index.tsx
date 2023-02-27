@@ -41,7 +41,7 @@ export default function Home() {
             <h1 className="text-5xl text-center">ETNOMEDICINE FINDER</h1>
           </div>
           <div>
-            <p className="text-2xl text-center pt-10">Temukan Solusi dari Penyakitmu di Sini!</p>
+            <p className="text-2xl text-center pt-20">Temukan Solusi dari penyakitmu disini!</p>
           </div>
           <div className="text-center pt-40 pb-20">
             <form onSubmit={e => {
@@ -108,7 +108,6 @@ export default function Home() {
             </div>
              */}
           </div>
-
           <div className="py-10">*Tugas Kelompok</div>
         </div>
       </main>
