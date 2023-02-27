@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,7 +8,11 @@ datasource db {
 }
 
 model medic {
-  id Int @id @default(autoincrement())
-  name String @db.MediumText
-  
+  id              Int     @id @default(autoincrement())
+  disease         String? @db.VarChar(255)
+  herb_name       String  @db.MediumText
+  origin_loc      String? @db.VarChar(255)
+  parts_used      String? @db.VarChar(255)
+  recipe          String? @db.MediumText
+  scientific_name String? @db.VarChar(255)
 }
