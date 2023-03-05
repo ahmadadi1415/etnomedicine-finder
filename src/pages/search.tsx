@@ -8,25 +8,26 @@ interface Props {
 }
 
 interface MedicData {
-    id: number,
-    herb_name: string,
-    parts_used: string,
-    origin_loc: string,
-    scientific_name: string
-    disease: string
-    recipe: string
+    id: number
+    disease:String
+    parts_used: String
+    recipe: String
+    scientific_name: String
+    how_to_use: String
+    url: String
+    local_name: String
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const { query } = context
-    const { disease } = query
+    const { q } = query
 
     // sk-JuJ463fb77863871a124
     //qGUo63fb7c474a74c124
     const medics = await prisma.medic.findMany({
         where: {
-            disease: { contains: disease as string }
+            disease: { contains: q as string }
         }
     })
 
@@ -50,22 +51,9 @@ export default function SearchResults({ medics }: Props) {
         }
     }, [herbId])
 
-    // async function fetchMedicines() {
-    //     const res = await fetch("/api/herbs")
-    //     const data = await res.json()
-    //     setMedicines(data)
-    //     console.log(data)
-    // }
-
     async function fetchOneMedicine(herbId: any) {
         const res = await fetch(`/api/herbs/${herbId}`)
         const data = await res.json()
-
-        // const query = 'aloevera'
-        // const plants = await fetch(`/api/serpapi-google/${query}`)
-        // const dataPlants = await plants.json()
-        // console.log(dataPlants)
-
         setOneMedicine(data)
         console.log(data)
     }
@@ -81,7 +69,7 @@ export default function SearchResults({ medics }: Props) {
                 <div className="container">
                     {oneMedicine?.id ? (
                         <div>
-                            <h1 className="text-3xl p-4">{oneMedicine.herb_name}</h1>
+                            <h1 className="text-3xl p-4">{oneMedicine.local_name}</h1>
                             <h2 className=""></h2>
                         </div>
                     ) : null}
@@ -93,8 +81,8 @@ export default function SearchResults({ medics }: Props) {
                                 <div className="table-cell text-center">Bagian yang Dimanfaatkan</div>
                                 <div className="table-cell text-center">Nama Lokal</div>
                                 <div className="table-cell text-center">Nama Ilmiah</div>
-                                <div className="table-cell text-center">Wilayah</div>
-                                <div className="table-cell text-center">Jenis Ramuan Untuk Penyakit</div>
+                                <div className="table-cell text-center">Cara Penggunaan</div>
+                                <div className="table-cell text-center">Penyakit</div>
                                 <div className="table-cell text-center">Resep</div>
                             </div>
                         </div>
@@ -103,9 +91,9 @@ export default function SearchResults({ medics }: Props) {
                                 <div className="table-row" key={result.id} onClick={() => appendQuery(result.id)}>
                                     <div className="table-cell text-center">{result.id}</div>
                                     <div className="table-cell text-center">{result.parts_used}</div>
-                                    <div className="table-cell text-center">{result.herb_name}</div>
+                                    <div className="table-cell text-center">{result.local_name}</div>
                                     <div className="table-cell text-center">{result.scientific_name}</div>
-                                    <div className="table-cell text-center">{result.origin_loc}</div>
+                                    <div className="table-cell text-center">{result.how_to_use}</div>
                                     <div className="table-cell text-center">{result.disease}</div>
                                     <div className="table-cell text-center">{result.recipe}</div>
                                 </div>

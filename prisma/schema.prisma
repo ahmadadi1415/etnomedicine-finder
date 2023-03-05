@@ -10,9 +10,10 @@ datasource db {
 model medic {
   id              Int     @id @default(autoincrement())
   disease         String? @db.VarChar(255)
-  herb_name       String  @db.MediumText
-  origin_loc      String? @db.VarChar(255)
   parts_used      String? @db.VarChar(255)
   recipe          String? @db.MediumText
   scientific_name String? @db.VarChar(255)
+  how_to_use      String? @db.TinyText
+  url             String? @db.TinyText
+  local_name      String  @db.MediumText
 }

@@ -1,30 +1,18 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { Inter } from '@next/font/google';
-import styles from '@/styles/Home.module.css';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { devNull } from 'os';
 
 const inter = Inter({ subsets: ['latin'] });
 
-interface MedicData {
-  id: number,
-  herb_name: string,
-  parts_used: string,
-  origin_loc: string,
-  scientific_name: string
-  disease: string
-  recipe: string
-}
-
 export default function Home() {
   const router = useRouter()
   const [disease, setDisease] = useState('')
- 
+
   async function handleSubmit(data: string) {
     console.log(data);
-    router.push(`/search?disease=${data}`);
+    router.push(`/search/${data}`);
   }
 
   return (
@@ -52,7 +40,7 @@ export default function Home() {
                 className="rounded-lg mx-2 bg-black"
                 type="search"
                 value={disease}
-                onChange={e => {  
+                onChange={e => {
                   e.preventDefault
                   setDisease(e.target.value)
                 }}
@@ -60,54 +48,7 @@ export default function Home() {
               <button className="" type='submit'>Cari</button>
             </form>
           </div>
-          
-          {/* {oneMedicine?.id ? (
-            <div>
-              <h1>{oneMedicine.herb_name}</h1>
-            </div>
-          ): null} */}
 
-          <div className="table w-full border-separate border border-spacing-3 table-auto">
-            <div className="table-header-group">
-              <div className="table-row" >
-                <div className="table-cell text-center ">No</div>
-                <div className="table-cell text-center ">Bagian yang Dimanfaatkan</div>
-                <div className="table-cell text-center ">Nama Lokal</div>
-                <div className="table-cell text-center ">Nama Ilmiah</div>
-                <div className="table-cell text-center ">Wilayah</div>
-                <div className="table-cell text-center ">Jenis Ramuan Untuk Penyakit</div>
-                <div className="table-cell text-center ">Resep</div>
-              </div>
-            </div>
-
-            <div className="table-row-group">
-
-              {/* Display Data Dummy
-              {medicines.map(medic => (
-                <div className="table-row" key={medic.id} onClick={() => appendQuery(medic.id)}>
-                  <div className="table-cell text-center">{medic.id}</div>
-                  <div className="table-cell text-center">{medic.parts_used}</div>
-                  <div className="table-cell text-center">{medic.herb_name}</div>
-                  <div className="table-cell text-center">{medic.scientific_name}</div>
-                  <div className="table-cell text-center">{medic.origin_loc}</div>
-                  <div className="table-cell text-center">{medic.disease}</div>
-                  <div className="table-cell text-center">{medic.recipe}</div>
-                </div>
-              ))} */}
-            </div>
-            {/* <div className="table-row-group">
-                  <div className="table-row">
-                    <div className="table-cell text-center">@</div>
-                    <div className="table-cell text-center">@</div>
-                    <div className="table-cell text-center">@</div>
-                    <div className="table-cell text-center">@</div>
-                    <div className="table-cell text-center">@</div>
-                    <div className="table-cell text-center">@</div>
-                    <div className="table-cell text-center">@</div>
-                  </div>
-            </div>
-             */}
-          </div>
           <div className="py-10">*Tugas Kelompok</div>
         </div>
       </main>

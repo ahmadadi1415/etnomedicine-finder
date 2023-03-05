@@ -6,7 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const data = await prisma?.medic.findMany({
         where:
         {
-            disease: 'tes'
+            disease: disease as string
         }
     })
     res.json(data)
