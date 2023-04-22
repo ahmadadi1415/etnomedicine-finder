@@ -17,3 +17,33 @@ model medic {
   url             String? @db.TinyText
   local_name      String  @db.MediumText
 }
+
+
+model MedicRecipe {
+  id Int @id @default(autoincrement())
+  disease String? @db.VarChar(255)
+  how_to_make String? @db.MediumText
+  how_to_use String? @db.TinyText
+
+  ingredient MedicIngredient[]
+}
+model MedicIngredient {
+  id Int @id @default(autoincrement())
+  recipe_id Int
+  herb_id Int 
+  parts_used String? @db.VarChar(255)
+  quantity String? @db.VarChar(255)
+
+  herbs Herbs @relation(fields: [herb_id], references: [id])
+  recipe MedicRecipe @relation(fields: [recipe_id], references: [id])
+}
+model Herbs {
+  id Int @id @default(autoincrement())
+  scientific_name String? @db.VarChar(255)
+  local_name String? @db.VarChar(255)
+  efficacy String? @db.VarChar(255)
+  image_id String?
+  image_url String?
+
+  ingredient MedicIngredient[]
+}
