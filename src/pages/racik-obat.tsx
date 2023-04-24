@@ -56,7 +56,6 @@ export default function RacikObat() {
     const [pageIndex, setPageIndex] = useState(1)
 
     const [herbDetail, setHerbDetail] = useState<HerbDetails>()
-    const [recipe, setRecipe] = useState<Recipe>()
     const [ingredients, setIngredients] = useState<MedicIngredient[]>([])
     const [ingrListIndex, setIngrListIndex] = useState(1)
     const [addHerbRes, setAddHerbRes] = useState<{ status: number, message: string }>()
@@ -205,7 +204,7 @@ export default function RacikObat() {
 
     useEffect(() => {
         // console.log(herbsFormData)
-    }, [herbsFormData, recipeFormData, addHerbRes, ingredients]);
+    }, [herbsFormData, recipeFormData, addHerbRes, ingredients, searchRes]);
 
     const handleImage = async (e: any) => {
         const reader = new FileReader();
