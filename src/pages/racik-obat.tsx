@@ -1,3 +1,4 @@
+import WebHead from "@/components/head";
 import NavigationBar from "@/components/navigationBar";
 import NotificationModal from "@/components/notificationModal";
 import { resizeImage } from "@/utils/image-resizer";
@@ -280,6 +281,7 @@ export default function RacikObat() {
 
     return (
         <>
+            <WebHead />
             <NavigationBar />
             <Container fluid css={{ py: "$15" }}>
                 <Grid.Container gap={1} justify="center">
@@ -302,6 +304,7 @@ export default function RacikObat() {
                                 </Card.Header>
                                 <Card.Body css={{ p: 0 }}>
                                     <Card.Image
+                                        loading="lazy"
                                         src={`${herbDetail?.image_url}`}
                                         showSkeleton
                                         objectFit="cover"
@@ -409,6 +412,7 @@ export default function RacikObat() {
                                                     }}>
                                                         <Card.Body css={{ p: 0 }}>
                                                             <Card.Image
+                                                                loading="lazy"
                                                                 showSkeleton
                                                                 src={`${searchData.image_url}`}
                                                                 objectFit="cover"
@@ -523,7 +527,7 @@ export default function RacikObat() {
                                                                 {ingr.local_name}
                                                             </Text>
                                                         </Card.Header>
-                                                        <Card.Divider/>
+                                                        <Card.Divider />
                                                         <Card.Body css={{ px: "0.5" }}>
                                                             <Tooltip trigger="click" content={"Bagian tumbuhan yang akan dimanfaatkan. Contohnya daun, buah, batang, atau ekstraknya."}>
                                                                 <Input

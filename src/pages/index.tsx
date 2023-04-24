@@ -1,3 +1,4 @@
+import WebHead from "@/components/head";
 import NavigationBar from "@/components/navigationBar";
 import { Col, Container, Row, Spacer, Text, Image, Grid, Button, Link } from "@nextui-org/react";
 import { ArrowRight } from "react-iconly";
@@ -6,6 +7,7 @@ export default function Home() {
 
     return (
         <>
+        <WebHead/>
         <NavigationBar/>
             <Container fluid >
                 <Grid.Container gap={2}>
