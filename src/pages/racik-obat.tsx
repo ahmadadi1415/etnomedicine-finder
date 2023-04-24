@@ -74,6 +74,7 @@ export default function RacikObat() {
         how_to_use: ""
     })
 
+    // Herbs searching functionality 
     async function search() {
         if (!refQuery) {
             return
@@ -88,6 +89,7 @@ export default function RacikObat() {
             })
     }
 
+    // Look for a detailed information of the herbs by getting the recipe by the herb_id
     async function lookDetails(herbData: SearchResults) {
         const response = await axios.get(`/api/recipes/search?herb_id=${herbData.herb_id}`)
         const recipeList: Recipe[] = await response.data
@@ -98,10 +100,11 @@ export default function RacikObat() {
         }
 
         setHerbDetail(herbDetails)
-        console.log(response.data)
-        console.log(recipeList)
+        // console.log(response.data)
+        // console.log(recipeList)
     }
 
+    // Adding ingredient for a medic recipe 
     const addIngredient = (local_name: string, herb_id: number) => {
         const included = ingredients.some((ingr) => ingr.local_name === local_name as string && ingr.herb_id === herb_id as number)
 
@@ -111,6 +114,7 @@ export default function RacikObat() {
         // console.log(ingredients.length)
     }
 
+    // Removing an ingredient of a medic recipe 
     const removeIngredient = (ingrIndex: number) => {
         setIngredients((prevIngr): MedicIngredient[] => prevIngr.filter((_, index) => index !== ingrIndex))
         console.log(ingredients.length - 1)
@@ -120,8 +124,10 @@ export default function RacikObat() {
         }
     }
 
+    // Adding a new herb functionality
     const addNewHerb = async () => {
 
+        // HerbsFormData validation
         if (herbsFormData.efficacy === "" || herbsFormData.local_name === "" || herbsFormData.scientific_name === "" || herbsFormData.image === "") {
             setNotify(true)
             setNotificationMessage({
@@ -157,13 +163,16 @@ export default function RacikObat() {
         // console.log(herbsFormData)
     }
 
+    // Adding a new recipe functionality
     const addNewRecipe = async () => {
 
+        // Set the RecipeFormData so it includes the ingredients the user inputed before
         setRecipeFormData((prevRecipeData) => ({
             ...prevRecipeData,
             ingredients: ingredients
         }))
 
+        // RecipeFormData validation
         if (recipeFormData.disease === "" || recipeFormData.how_to_make === "" || recipeFormData.how_to_use === "" || recipeFormData.ingredients.length === 0) {
             setNotify(true)
             setNotificationMessage({
@@ -173,6 +182,7 @@ export default function RacikObat() {
             return
         }
 
+        // POST the RecipeFormData to the Server
         const response = await axios.post("/api/recipes", recipeFormData)
             .then((response) => {
 
@@ -188,6 +198,7 @@ export default function RacikObat() {
                     })
                 }
 
+                // Reset the RecipeFormData so its empty
                 setRecipeFormData({
                     disease: "",
                     how_to_make: "",
@@ -206,13 +217,17 @@ export default function RacikObat() {
         // console.log(herbsFormData)
     }, [herbsFormData, recipeFormData, addHerbRes, ingredients, searchRes]);
 
+    // Handling image input from the user
     const handleImage = async (e: any) => {
         const reader = new FileReader();
+        // Resizing user image to max width 512 and max height 512
         await resizeImage(e.target.files[0], 512, 512).then((blob) => {
             // setLocalImg(blob as any);
             reader.readAsDataURL(blob);
             reader.onloadend = () => {
                 setImage(reader.result as any);
+
+                // Setting the HerbsFormData.image so it has the same as user input
                 setHerbsFormData((prevHerbData) => ({
                     ...prevHerbData,
                     image: reader.result as string
@@ -221,6 +236,7 @@ export default function RacikObat() {
         });
     };
 
+    // Handling Recipe Input Form from the user
     const handleRecipeInput = (e: any) => {
         const fieldName = e.target.name
         const fieldValue = e.target.value
@@ -231,6 +247,7 @@ export default function RacikObat() {
         }))
     }
 
+    // Handling Herb Input Form from the user
     const handleHerbInput = (e: any) => {
         const fieldName = e.target.name
         const fieldValue = e.target.value
@@ -241,6 +258,7 @@ export default function RacikObat() {
         }))
     }
 
+    // Handling user edit detail of an ingredient (User editing the quantity and parts_used input)
     const handleIngrInput = (e: ChangeEvent<FormElement>, ingrIndex: number) => {
         const fieldName = e.target.name
         const fieldValue = e.target.value
@@ -251,6 +269,7 @@ export default function RacikObat() {
         setIngredients(newIngr)
     }
 
+    // Herbs Input Modal Handler
     const openModalHandler = () => {
         setVisible(true)
     }
