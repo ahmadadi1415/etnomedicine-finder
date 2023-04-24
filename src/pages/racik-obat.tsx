@@ -302,7 +302,7 @@ export default function RacikObat() {
                                 </Card.Header>
                                 <Card.Body css={{ p: 0 }}>
                                     <Card.Image
-                                        src={`/img/herbs/${herbDetail?.image_url}`}
+                                        src={`${herbDetail?.image_url}`}
                                         showSkeleton
                                         objectFit="cover"
                                         width={"100%"}
@@ -410,7 +410,7 @@ export default function RacikObat() {
                                                         <Card.Body css={{ p: 0 }}>
                                                             <Card.Image
                                                                 showSkeleton
-                                                                src={`/img/herbs/${searchData.image_url}`}
+                                                                src={`${searchData.image_url}`}
                                                                 objectFit="cover"
                                                                 height={"135px"}
                                                                 width={"100%"}
@@ -523,7 +523,7 @@ export default function RacikObat() {
                                                                 {ingr.local_name}
                                                             </Text>
                                                         </Card.Header>
-                                                        <Card.Divider></Card.Divider>
+                                                        <Card.Divider/>
                                                         <Card.Body css={{ px: "0.5" }}>
                                                             <Tooltip trigger="click" content={"Bagian tumbuhan yang akan dimanfaatkan. Contohnya daun, buah, batang, atau ekstraknya."}>
                                                                 <Input

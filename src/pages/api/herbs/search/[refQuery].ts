@@ -79,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         local_name: ing.herbs.local_name as string,
                         scientific_name: ing.herbs.scientific_name as string,
                         efficacy: ing.herbs.efficacy as string,
-                        image_url: (!ing.herbs.image_url) ? ing.herbs.local_name?.toUpperCase() + ".png" : ing.herbs.image_url as string
+                        image_url: (!ing.herbs.image_url) ? "/img/herbs/" + ing.herbs.local_name?.toUpperCase() + ".png" : ing.herbs.image_url as string
                     }
                     return flatten
                 })
