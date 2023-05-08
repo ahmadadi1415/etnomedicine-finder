@@ -20,6 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === "POST") {
         const {disease, how_to_make, how_to_use, ingredients} : Recipe = req.body
         console.log(req.body)
+        
         ingredients.map(ingr => delete ingr.local_name)
 
         if (!disease || !how_to_make || !how_to_use || !ingredients) {
