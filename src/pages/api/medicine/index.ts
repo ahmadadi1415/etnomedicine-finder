@@ -8,8 +8,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const response = await prisma.medicRecipe.findMany({
             include: {
                 ingredient: {
-                    include: {
-                        herbs: true
+                    select: {
+                        parts_used: true,
+                        herb_id: true,
+                        herbs: {
+                            select: {
+                                local_name: true,
+                                image_url: true
+                            }
+                        }
                     }
                 }
             }
@@ -30,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 ways_to_use: recipe.how_to_use,
                 ingredient: recipe.ingredient.map(ingredient => {
                     return {
-                        id: ingredient.id,
+                        id: ingredient.herb_id,
                         name: ingredient.herbs.local_name,
                         image: ingredient.herbs.image_url,
                         category: ingredient.parts_used

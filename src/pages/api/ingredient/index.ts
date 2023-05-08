@@ -10,7 +10,11 @@ export default async function handler(req: NextApiRequest, res:NextApiResponse) 
                 id: true,
                 image_url: true,
                 local_name: true,
-                ingredient: true
+                ingredient: {
+                    select: {
+                        parts_used: true
+                    }
+                }
             }
         })
 

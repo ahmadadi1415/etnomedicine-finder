@@ -13,15 +13,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             },
             include: {
                 ingredient: {
-                    include: {
-                        herbs: true
-                    }
+                    select: {
+                        herb_id: true,
+                        parts_used: true,
+                        herbs: {
+                            select: {
+                                local_name: true,
+                                image_url: true,
+                            }
+                        }
+                    },
+                    
                 }
             }
         })
 
         if (!recipe) {
-            return res.status(404).json({message: `Ingredient with id ${id} doesnt exist`})
+            return res.status(404).json({message: `Medicine with id ${id} doesnt exist`})
         }
 
         let recipeName
@@ -38,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             ways_to_use: recipe.how_to_use,
             ingredient: recipe.ingredient.map(ingredient => {
                 return {
-                    id: ingredient.id,
+                    id: ingredient.herb_id,
                     name: ingredient.herbs.local_name,
                     image: ingredient.herbs.image_url,
                     category: ingredient.parts_used
