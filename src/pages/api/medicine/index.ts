@@ -35,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 description: "",
                 usage_rules: recipe.how_to_make,
                 ways_to_use: recipe.how_to_use,
-                ingredient: recipe.ingredient.map(ingredient => {
+                ingredients: recipe.ingredient.map(ingredient => {
                     return {
                         id: ingredient.herb_id,
                         name: ingredient.herbs.local_name,
